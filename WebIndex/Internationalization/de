@@ -1,0 +1,30 @@
+﻿# Deutsch
+plugin.name=WebIndex
+plugin.description=Ein Tutorial zur Veranschaulichung des WebIndex.
+
+app.name=WebIndex Tutorial
+app.label=WebExprss Application
+app.description=Ein Tutorial zur Veranschaulichung des WebIndex.
+app.license.label=Lizenz MIT 
+app.license.uri=https://github.com/ReneSchwarzer/WebExpress.Tutorial.WebIndex/blob/main/LICENSE
+app.about=Über WebIndex Tutorial
+app.version.label={0} Version {1} erstellt mit {2} Version {3}.
+
+module.name=WebIndex
+module.description=Modul der Anwendung WebIndex.
+
+homepage.label=Startseite
+infopage.label=Info
+search.label=Suchen
+search.placeholder=enter wql
+setting.label=Einstellungen
+setting.general.label=Allgemein
+setting.initialpage.add.label=URL
+setting.initialpage.add.header=Fügen Sie eine URL hinzu.
+setting.initialpage.add.placeholder=http://
+index.label=Index
+title.label=Titel
+url.label=URL
+add.label=Hinzufügen
+edit.label=Bearbeiten
+run.label=Starten
