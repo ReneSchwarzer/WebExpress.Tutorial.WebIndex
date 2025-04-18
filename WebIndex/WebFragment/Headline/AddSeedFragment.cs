@@ -5,34 +5,32 @@ using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
+using WebExpress.WebUI.WebIcon;
 using WebExpress.WebUI.WebPage;
-using WebIndex.WebSettingPage;
+using WebIndex.WWW.Setting;
 
-namespace WebIndex.WebFragment
+namespace WebIndex.WebFragment.Headline
 {
     /// <summary>
     /// Represents a fragment control button link for adding an initial link.
     /// </summary>
     [Section<SectionHeadlineSecondary>]
-    [Scope<GeneralSettingPage>]
-    public sealed class AddInitialLinkFragment : FragmentControlButtonLink
+    [Scope<Seed>]
+    public sealed class AddSeedFragment : FragmentControlButtonLink
     {
-        /// <summary>
-        /// Returns the modal dialog for adding a user.
-        /// </summary>
-        private InitialPageModalFormularControl ModalDlg = new InitialPageModalFormularControl("add_initialpage");
+        private readonly SeedForm _modalDlg = new SeedForm("add_initialpage");
 
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public AddInitialLinkFragment(IFragmentContext fragmentContext)
+        public AddSeedFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
             Text = "webindex:add.label";
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
-            Icon = new PropertyIcon(TypeIcon.Plus);
-            Modal = new PropertyModal(TypeModal.Modal, ModalDlg);
+            Icon = new IconPlus();
+            Modal = new PropertyModal(TypeModal.Modal, _modalDlg);
         }
 
         /// <summary>

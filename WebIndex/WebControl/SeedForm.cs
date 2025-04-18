@@ -7,15 +7,15 @@ namespace WebExpress.WebApp.WebControl
     /// <summary>
     /// Represents a modal form control for the initial page settings.
     /// </summary>
-    internal sealed class InitialPageModalFormularControl : ControlModalForm
+    internal sealed class SeedForm : ControlModalForm
     {
         /// <summary>
         /// Returns the control element for entering the login identifier.
         /// </summary>
         private ControlFormItemInputTextBox Url { get; } = new ControlFormItemInputTextBox()
         {
-            Label = "webindex:setting.initialpage.add.label",
-            Placeholder = "webindex:setting.initialpage.add.placeholder",
+            Label = "webindex:setting.seed.add.label",
+            Placeholder = "webindex:setting.seed.add.placeholder",
             Name = "url"
         };
 
@@ -26,12 +26,11 @@ namespace WebExpress.WebApp.WebControl
         {
         };
 
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="InitialPageModalFormularControl"/> class.
+        /// Initializes a new instance of the <see cref="SeedForm"/> class.
         /// </summary>
         /// <param name="id">The id.</param>
-        public InitialPageModalFormularControl(string id = null)
+        public SeedForm(string id = null)
             : base(id)
         {
             //Url.Validation += OnUrlValidation;
@@ -41,7 +40,7 @@ namespace WebExpress.WebApp.WebControl
 
             Form.ProcessForm += OnConfirm;
 
-            Header = "webindex:setting.initialpage.add.header";
+            Header = "webindex:setting.seed.add.header";
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace WebExpress.WebApp.WebControl
         {
             if (string.IsNullOrWhiteSpace(Url.Value))
             {
-                e.Results.Add(new ValidationResult(TypesInputValidity.Error, "webexpress.webapp:setting.usermanager.user.add.login.error.empty"));
+                e.Results.Add(new ValidationResult(TypesInputValidity.Error, "webindex:setting.seed.add.empty"));
             }
         }
 
@@ -64,13 +63,13 @@ namespace WebExpress.WebApp.WebControl
         /// <param name="e">The event argument.</param>
         private void OnConfirm(object sender, FormEventArgs e)
         {
-            var page = new InitialPageItem()
+            var page = new Seed()
             {
                 Id = Guid.NewGuid(),
                 Url = Url.Value
             };
 
-            ViewModel.AddInitialPage(page);
+            ViewModel.AddSeed(page);
 
             //e.Context.Redirecting(e.Context.Uri);
         }

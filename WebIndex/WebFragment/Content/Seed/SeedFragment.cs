@@ -4,39 +4,46 @@ using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
+using WebExpress.WebCore.WebSitemap;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
 using WebExpress.WebUI.WebPage;
-using WebIndex.WebSettingPage;
 
-namespace WebIndex.WebFragment
+namespace WebIndex.WebFragment.Content.Seed
 {
     /// <summary>
-    /// Represents the fragment control panel for the index page.
+    /// Represents the initial link fragment which is a control panel fragment.
     /// </summary>
-    /// <remarks>
-    /// This fragment is used to display a table with initial pages and provides options to manage them.
-    /// </remarks>
     [Section<SectionContentPrimary>]
-    [Scope<GeneralSettingPage>]
-    public sealed class IndexFragment : FragmentControlPanel
+    [Scope<WWW.Setting.Seed>]
+    public sealed class SeedFragment : FragmentControlPanel
     {
+        private ISitemapManager _sitemapManager;
+
         /// <summary>
         /// Returns the table.
         /// </summary>
         private ControlApiTable Table { get; } = new ControlApiTable()
         {
-            Margin = new PropertySpacingMargin(PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.Three)
+            Margin = new PropertySpacingMargin
+            (
+                PropertySpacing.Space.None,
+                PropertySpacing.Space.None,
+                PropertySpacing.Space.None,
+                PropertySpacing.Space.Three
+            )
         };
 
         /// <summary>
-        /// Initializes a new instance of the  class.
+        /// Initializes a new instance of the class.
         /// </summary>
+        /// <param name="sitemapManager">The sitemap manager.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public IndexFragment(IFragmentContext fragmentContext)
+        public SeedFragment(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Table.RestUri = fragmentContext.ApplicationContext.ContextPath.Append("api/1/initialpages");
+            _sitemapManager = sitemapManager;
+            Table.RestUri = sitemapManager.GetUri<Api.V1.Seed>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
@@ -47,14 +54,15 @@ namespace WebIndex.WebFragment
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            Table.OptionSettings.Icon = TypeIcon.Cog.ToClass();
+            var restUri = _sitemapManager.GetUri<Api.V1.Seed>(FragmentContext.ApplicationContext);
+            Table.OptionSettings.Icon = "fas fa-cog";
 
             Table.OptionItems.Clear();
             Table.OptionItems.Add(new ControlApiTableOptionItem(I18N.Translate(renderContext.Request?.Culture, "webexpress.webapp:delete.label"))
             {
-                Icon = TypeIcon.Trash.ToClass(),
+                Icon = "fas fa-trash",
                 Color = TypeColorText.Danger.ToClass(),
-                OnClick = $"new webexpress.webui.modalFormularCtrl({{ uri: '{renderContext.PageContext.ApplicationContext.ContextPath.Append("setting/initialpages/del/")}/' + item.id, size: 'small' }});"
+                OnClick = $"new webexpress.webui.modalFormCtrl({{ uri: '{restUri.ToString()}/' + item.id, size: 'small' }});"
             });
 
             return Table.Render(renderContext, visualTree);

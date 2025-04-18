@@ -4,17 +4,17 @@ using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
+using WebExpress.WebUI.WebIcon;
 using WebExpress.WebUI.WebPage;
 using WebIndex.Model;
-using WebIndex.WebSettingPage;
 
-namespace WebIndex.WebFragment
+namespace WebIndex.WebFragment.Headline
 {
     /// <summary>
     /// Represents a fragment control form for initiating a web crawling operation.
     /// </summary>
     [Section<SectionHeadlineSecondary>]
-    [Scope<IndexSettingPage>]
+    [Scope<WWW.Setting.Seed>]
     public sealed class CrawlFragment : FragmentControlForm
     {
         /// <summary>
@@ -29,7 +29,7 @@ namespace WebIndex.WebFragment
             {
                 Text = "webindex:run.label",
                 BackgroundColor = new PropertyColorBackground(TypeColorBackground.Success),
-                Icon = new PropertyIcon(TypeIcon.PlayCircle)
+                Icon = new IconPlayCircle()
             });
         }
 
@@ -39,7 +39,7 @@ namespace WebIndex.WebFragment
         /// <param name="renderContext">The context in which the form is rendered.</param>
         protected override void OnProcess(IRenderControlFormContext renderContext)
         {
-            WebCrawler.Crawl();
+            WebCrawler.Crawl(renderContext.Request);
         }
 
         /// <summary>

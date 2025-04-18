@@ -2,20 +2,20 @@
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
-using WebExpress.WebCore.WebMessage;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
 using WebExpress.WebUI.WebPage;
-using WebIndex.WebPage;
+using WebIndex.WebControl;
+using WebIndex.WWW;
 
-namespace WebIndex.WebFragment
+namespace WebIndex.WebFragment.Content.Home
 {
     /// <summary>
     /// Represents the home content fragment which includes a search form.
     /// </summary>
     [Section<SectionContentPrimary>]
-    [Scope<HomePage>]
-    public sealed class HomeContentFragment : FragmentControlPanelFlexbox
+    [Scope<WWW.Index>]
+    public sealed class SearchFragment : FragmentControlPanelFlexbox
     {
         /// <summary>
         /// Returns the control image for the home content fragment.
@@ -30,17 +30,16 @@ namespace WebIndex.WebFragment
         /// <summary>
         /// Returns the search formular.
         /// </summary>
-        public ControlForm Form { get; } = new ControlForm("searchform")
+        public ControlForm Form { get; } = new SearchForm()
         {
-            FormLayout = TypeLayoutForm.Inline,
-            Justify = TypeJustifiedFlexbox.Center,
+            Justify = TypeJustifiedFlexbox.Center
         };
 
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public HomeContentFragment(IFragmentContext fragmentContext)
+        public SearchFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
             Layout = TypeLayoutFlexbox.Default;
@@ -51,11 +50,10 @@ namespace WebIndex.WebFragment
             Add(Image);
             Add(Form);
 
-            Image.Uri = fragmentContext.ApplicationContext.ContextPath.Append("/assets/img/webindexlogo.png");
+            Image.Uri = fragmentContext.ApplicationContext.ContextPath
+                .Concat("/assets/img/webindexlogo.png")
+                ?.ToUri();
 
-            Form.Add(new ControlFormItemInputTextBox() { Name = "search", Placeholder = "webindex:search.placeholder", Styles = ["width: 30rem;"] });
-            Form.Method = RequestMethod.POST;
-            Form.AddPrimaryButton(new ControlFormItemButtonSubmit() { Text = "webindex:search.label", Icon = new PropertyIcon(TypeIcon.PaperPlane) });
             Form.ProcessForm += (s, e) =>
             {
 

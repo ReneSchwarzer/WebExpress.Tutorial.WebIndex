@@ -1,28 +1,27 @@
-﻿using WebExpress.WebApp.WebPage;
-using WebExpress.WebApp.WebScope;
+﻿using WebExpress.WebApp.WebScope;
+using WebExpress.WebApp.WebSettingPage;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
 using WebExpress.WebCore.WebSettingPage;
+using WebExpress.WebUI.WebIcon;
 
-namespace WebIndex.WebSettingPage
+namespace WebIndex.WWW.Setting
 {
     /// <summary>
     /// Represents the settings page for the index.
     /// </summary>
+    [WebIcon<IconGlobe>]
     [Title("webindex:index.label")]
-    [Segment("index", "webindex:index.label")]
-    [ContextPath("/setting")]
-    [SettingGroup("webindex:setting.general.label")]
-    [SettingContext("webexpress.webapp:setting.tab.general.label")]
-    //[SettingSection<SettingSectionPreferences>)]
-    //[SettingIcon(TypeIcon.Globe)]
+    [SettingCategory<SettingCategoryGeneral>()]
+    [SettingGroup<SettingGroupGeneral>()]
+    [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
-    public sealed class IndexSettingPage : ISettingPage<VisualTreeWebApp>, IScopeAdmin
+    public sealed class Index : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public IndexSettingPage()
+        public Index()
         {
         }
 
@@ -31,7 +30,7 @@ namespace WebIndex.WebSettingPage
         /// </summary>
         /// <param name="renderContext">The context for rendering the page.</param>
         /// <param name="visualTree">The visual tree of the web application.</param>
-        public void Process(IRenderContext renderContext, VisualTreeWebApp visualTree)
+        public void Process(IRenderContext renderContext, VisualTreeWebAppSetting visualTree)
         {
         }
     }

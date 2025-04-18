@@ -7,11 +7,12 @@ namespace WebIndex.Model
     /// <summary>
     /// The class contains information about a webpage.
     /// </summary>
-    public class PageItem : IIndexItem
+    public class Index : IIndexItem
     {
         /// <summary>
         /// The URL of the webpage.
         /// </summary>
+        [IndexIgnore]
         public Guid Id { get; set; }
 
         /// <summary>
@@ -25,15 +26,14 @@ namespace WebIndex.Model
         [IndexDefaultSearch]
         public string Title { get; set; }
 
-        ///// <summary>
-        ///// Returns or sets the content of the webpage.
-        ///// </summary>
+        /// <summary>
+        /// Returns or sets the content of the webpage.
+        /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Returns or sets the date when the webpage was added to the index.
+        /// Returns or sets the metadata of the webpage.
         /// </summary>
-        [IndexIgnore]
-        public DateTime Create { get; set; }
+        public MetaData MetaData { get; set; }
     }
 }

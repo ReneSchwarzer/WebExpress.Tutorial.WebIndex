@@ -6,22 +6,19 @@ using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
 using WebExpress.WebIndex.Wql;
-using WebIndex.Model;
 
-namespace WebIndex.WebApi.V1
+namespace WebIndex.Api.V1
 {
     /// <summary>
-    /// Returns all pages.
+    /// Handles REST API requests for Index entities.
     /// </summary>
-    [Segment("indices", "")]
-    [ContextPath("/api")]
     [Method(CrudMethod.GET)]
-    public sealed class IndicesRest : RestApiCrud<PageItem>
+    public sealed class Index : RestApiCrud<Model.Index>
     {
         /// <summary>
-        /// Constructor
+        /// Initializes a new instance of the class.
         /// </summary>
-        public IndicesRest()
+        public Index()
         {
         }
 
@@ -53,9 +50,9 @@ namespace WebIndex.WebApi.V1
         /// <param name="wql">The filtering and sorting options.</param>
         /// <param name="request">The request.</param>
         /// <returns>An enumeration of which json serializer can be serialized.</returns>
-        public override IEnumerable<PageItem> GetData(IWqlStatement<PageItem> wql, Request request)
+        public override IEnumerable<Model.Index> GetData(IWqlStatement<Model.Index> wql, Request request)
         {
-            return wql?.Apply() ?? Enumerable.Empty<PageItem>();
+            return wql?.Apply() ?? Enumerable.Empty<Model.Index>();
         }
     }
 }

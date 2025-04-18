@@ -10,17 +10,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\img\crawler.svg" />
 	  <None Remove="Assets\img\webindex.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="Assets\css\theme.css" />
+		<EmbeddedResource Include="Assets\img\crawler.svg" />
 		<EmbeddedResource Include="Assets\img\webindexlogo.png" />
 		<EmbeddedResource Include="Internationalization/en" />
 		<EmbeddedResource Include="Internationalization/de" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Assets/img/favicon.png" />
+		<EmbeddedResource Include="Assets\img\favicon.png" />
 		<EmbeddedResource Include="Assets\img\webindex.svg" />
 	</ItemGroup>
 

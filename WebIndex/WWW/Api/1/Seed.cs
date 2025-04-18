@@ -6,23 +6,20 @@ using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
 using WebExpress.WebIndex.Wql;
-using WebIndex.Model;
 
-namespace WebIndex.WebApi.V1
+namespace WebIndex.Api.V1
 {
     /// <summary>
-    /// Returns all initial pages.
+    /// Represents a REST API endpoint for CRUD operations on Seed entities.
     /// </summary>
-    [Segment("initialpages", "")]
-    [ContextPath("/api/")]
     [Method(CrudMethod.POST)]
     [Method(CrudMethod.GET)]
-    public sealed class InitialPageRest : RestApiCrud<InitialPageItem>
+    public sealed class Seed : RestApiCrud<Model.Seed>
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public InitialPageRest()
+        public Seed()
         {
         }
 
@@ -49,9 +46,9 @@ namespace WebIndex.WebApi.V1
         /// <param name="wql">The filtering and sorting options.</param>
         /// <param name="request">The request.</param>
         /// <returns>An enumeration of which json serializer can be serialized.</returns>
-        public override IEnumerable<InitialPageItem> GetData(IWqlStatement<InitialPageItem> wql, Request request)
+        public override IEnumerable<Model.Seed> GetData(IWqlStatement<Model.Seed> wql, Request request)
         {
-            return wql?.Apply() ?? Enumerable.Empty<InitialPageItem>();
+            return wql?.Apply() ?? Enumerable.Empty<Model.Seed>();
         }
     }
 }

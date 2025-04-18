@@ -4,11 +4,12 @@ using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
+using WebExpress.WebCore.WebUri;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
 using WebExpress.WebUI.WebPage;
 
-namespace WebIndex.WebFragment
+namespace WebIndex.WebFragment.Footer
 {
     /// <summary>
     /// Represents the footer fragment of the web application.
@@ -51,7 +52,7 @@ namespace WebIndex.WebFragment
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
             LicenceLink.Text = "webindex:app.license.label";
-            LicenceLink.Uri = I18N.Translate(renderContext.Request?.Culture, "webindex:app.license.uri");
+            LicenceLink.Uri = new UriEndpoint(I18N.Translate(renderContext.Request?.Culture, "webindex:app.license.uri"));
 
             return base.Render(renderContext, visualTree);
         }

@@ -7,20 +7,19 @@ using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
 using WebExpress.WebUI.WebControl;
 
-namespace WebIndex.WebPage
+namespace WebIndex.WWW
 {
     /// <summary>
     /// Represents the info page for the tutorial.
     /// </summary>
     [Title("webindex:infopage.label")]
-    [Segment("info", "webindex:infopage.label")]
     [Scope<IScopeGeneral>]
-    public sealed class InfoPage : IPage<VisualTreeWebApp>, IScopeGeneral
+    public sealed class Info : IPage<VisualTreeWebApp>, IScopeGeneral
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InfoPage"/> class.
+        /// Initializes a new instance of the <see cref="Info"/> class.
         /// </summary>
-        public InfoPage()
+        public Info()
         {
         }
 
@@ -34,9 +33,11 @@ namespace WebIndex.WebPage
             var webexpress = WebEx.ComponentHub.PluginManager.Plugins.Where(x => x.PluginId.ToString() == "webexpress.webapp").FirstOrDefault();
             var webindex = WebEx.ComponentHub.PluginManager.Plugins.Where(x => x.Assembly == GetType().Assembly).FirstOrDefault();
 
-            visualTree.Content.Primary.Add(new ControlImage()
+            visualTree.Content.MainPanel.AddPrimary(new ControlImage()
             {
-                Uri = renderContext.PageContext.ContextPath.Append("assets/img/webindex.svg"),
+                Uri = renderContext.PageContext.ApplicationContext
+                    .ContextPath.Concat("assets/img/webindex.svg")
+                    .ToUri(),
                 Width = 200,
                 Height = 200,
                 HorizontalAlignment = TypeHorizontalAlignment.Right
@@ -78,7 +79,7 @@ namespace WebIndex.WebPage
                 TextColor = new PropertyColorText(TypeColorText.Primary)
             });
 
-            visualTree.Content.Primary.Add(card);
+            visualTree.Content.MainPanel.AddPrimary(card);
         }
     }
 }

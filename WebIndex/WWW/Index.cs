@@ -2,25 +2,18 @@
 using WebExpress.WebApp.WebScope;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
-using WebExpress.WebCore.WebSettingPage;
-using WebExpress.WebCore.WebSettingPage.Model;
 
-namespace WebIndex.WebSettingPage
+namespace WebIndex.WWW
 {
-    [Title("webindex:setting.label")]
-    [Segment("general", "webindex:setting.label")]
-    [ContextPath("/setting")]
-    [SettingGroup("webindex:setting.general.label")]
-    [SettingContext("webexpress.webapp:setting.tab.general.label")]
-    [SettingSection(SettingSection.Primary)]
-    //[SettingIcon(TypeIcon.Wrench)]
-    [Scope<IScopeAdmin>]
-    public sealed class GeneralSettingPage : ISettingPage<VisualTreeWebApp>, IScopeAdmin
+    [Title("webindex:homepage.label")]
+    [Segment(null, "webindex:homepage.label")]
+    [Scope<IScopeGeneral>]
+    public sealed class Index : IPage<VisualTreeWebApp>, IScopeGeneral
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public GeneralSettingPage()
+        public Index()
         {
         }
 

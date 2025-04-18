@@ -14,6 +14,7 @@ namespace WebIndex.Model
     internal static class ViewModel
     {
         private static IComponentHub _componentHub;
+        private static IndexManager _indexManager;
 
         /// <summary>
         /// Initialization.
@@ -23,32 +24,29 @@ namespace WebIndex.Model
         public static void Initialization(IComponentHub componentHub, IApplicationContext applicationContext)
         {
             _componentHub = componentHub;
+            _indexManager = _componentHub.GetComponentManager<IndexManager>();
 
             // indexing the data
-            _componentHub.GetComponentManager<IndexManager>()?.Create<InitialPageItem>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
-            _componentHub.GetComponentManager<IndexManager>()?.Create<PageItem>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
+            _indexManager.Create<Seed>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
+            _indexManager.Create<Index>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
 
-            //_componentHub.GetComponentManager<IndexManager>()?.ReIndex<InitialPageItem>();
 
-            if ((bool)!_componentHub.GetComponentManager<IndexManager>()?
-                .Retrieve<InitialPageItem>("Url = 'https://www.gutenberg.org/'")?
-                .Apply()
-                .Any())
+            if (!_indexManager.All<Seed>().Any())
             {
-                AddInitialPage(new InitialPageItem() { Id = Guid.NewGuid(), Url = "https://www.gutenberg.org/" });
-                //AddInitialPage(new InitialPageItem() { Id = Guid.NewGuid(), Url = "https://wikipedia.de" });
-
-                WebCrawler.Crawl();
+#if DEBUG
+                AddSeed(new Seed() { Id = Guid.NewGuid(), Url = "https://www.gutenberg.org/" });
+                AddSeed(new Seed() { Id = Guid.NewGuid(), Url = "https://www.wikipedia.org/" });
+#endif
             }
         }
 
         /// <summary>
         /// Adds an initial page to the index.
         /// </summary>
-        /// <param name="page">The initial page to add to the index.</param>
-        public static void AddInitialPage(InitialPageItem page)
+        /// <param name="seed">The initial seed uri to add to the index.</param>
+        public static void AddSeed(Seed seed)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Insert(page);
+            _componentHub.GetComponentManager<IndexManager>()?.Insert(seed);
         }
 
         /// <summary>
@@ -56,9 +54,9 @@ namespace WebIndex.Model
         /// </summary>
         /// <param name="search">The search string to match against the index.</param>
         /// <returns>An enumerable that match the search string.</returns>
-        public static IEnumerable<PageItem> Retrieve(string search)
+        public static IEnumerable<Index> Retrieve(string search)
         {
-            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<PageItem>(search)?.Apply().Where(x => x != null);
+            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<Index>(search)?.Apply().Where(x => x != null);
         }
     }
 }

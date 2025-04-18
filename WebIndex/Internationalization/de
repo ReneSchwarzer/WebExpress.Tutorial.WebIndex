@@ -14,17 +14,24 @@ module.name=WebIndex
 module.description=Modul der Anwendung WebIndex.
 
 homepage.label=Startseite
+homepage.conter=Ungefähr {0} Ergebnisse
 infopage.label=Info
 search.label=Suchen
 search.placeholder=enter wql
 setting.label=Einstellungen
 setting.general.label=Allgemein
-setting.initialpage.add.label=URL
-setting.initialpage.add.header=Fügen Sie eine URL hinzu.
-setting.initialpage.add.placeholder=http://
+setting.seed.label=Startpunkt
+setting.seed.add.label=URL
+setting.seed.add.header=Fügen Sie eine Start-URL hinzu.
+setting.seed.add.placeholder=http://
+setting.seed.add.empty=Keine Startpunkt vorhanden.
+setting.index.clear.label=Index löschen
 index.label=Index
 title.label=Titel
 url.label=URL
 add.label=Hinzufügen
 edit.label=Bearbeiten
 run.label=Starten
+
+crawl.start=Beginne mit der Indexierung...
+crawl.add=Url '{0}' wird hinzugefügt.<br>Fortschritt: {1}

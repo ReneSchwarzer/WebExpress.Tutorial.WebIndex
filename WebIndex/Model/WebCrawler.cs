@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebExpress.WebApp.WebIndex;
 using WebExpress.WebCore;
+using WebExpress.WebCore.Internationalization;
+using WebExpress.WebCore.WebMessage;
+using WebExpress.WebUI.WebNotification;
 
 namespace WebIndex.Model
 {
@@ -14,24 +17,29 @@ namespace WebIndex.Model
     internal static class WebCrawler
     {
         public static ConcurrentDictionary<Guid, string> Urls = new();
+        private const uint MAX_COUNT = 100u;
 
         /// <summary>
-        /// Starts the web crawling process.
+        /// Starts the web crawling process for the given request.
         /// </summary>
-        public static void Crawl()
+        /// <param name="request">The request object containing the necessary parameters for the crawling process.</param>
+        public static void Crawl(Request request)
         {
-            WebEx.ComponentHub.GetComponentManager<IndexManager>()?.Clear<PageItem>();
+            WebEx.ComponentHub.GetComponentManager<IndexManager>()?.Clear<Index>();
+            var applicationContext = WebEx.ComponentHub.ApplicationManager.GetApplication<Application>();
 
-            foreach (var initial in WebEx.ComponentHub.GetComponentManager<IndexManager>().All<InitialPageItem>())
+            foreach (var initial in WebEx.ComponentHub.GetComponentManager<IndexManager>().All<Seed>())
             {
                 Urls.TryAdd(initial.Id, initial.Url);
             }
 
-            //var notification = WebEx.ComponentHub.GetComponentManager<NotificationManager>()?.AddNotification
-            //(
-            //    message: "<p>start indexing</p>",
-            //    durability: -1
-            //);
+            var notification = WebEx.ComponentHub.GetComponentManager<NotificationManager>()?.AddNotification
+            (
+                applicationContext: applicationContext,
+                message: I18N.Translate(request, "webindex:crawl.start"),
+                durability: -1,
+                icon: applicationContext.ContextPath + "/assets/img/crawler.svg"
+            );
 
             var task = new Task(() =>
             {
@@ -39,11 +47,19 @@ namespace WebIndex.Model
                 {
                     Crawl(url);
 
-                    var count = WebEx.ComponentHub.GetComponentManager<IndexManager>().Count<PageItem>();
+                    var count = WebEx.ComponentHub.GetComponentManager<IndexManager>().Count<Index>();
+                    var trimAndEllipsisUrl = url.Length > 80 ? string.Concat(url.AsSpan(0, 77), "...") : url;
 
-                    //notification.Message = $"<p>add url '{url}' ({count}/1000)</p>";
+                    notification.Message = I18N.Translate
+                    (
+                        request,
+                        "webindex:crawl.add",
+                        trimAndEllipsisUrl,
+                        $"({count}/{MAX_COUNT})"
+                    );
+                    notification.Progress = (int)(count * 100 / MAX_COUNT);
 
-                    if (count > 100)
+                    if (count >= MAX_COUNT)
                     {
                         break;
                     }
@@ -59,7 +75,7 @@ namespace WebIndex.Model
         /// <param name="url">The URL to crawl.</param>
         public static void Crawl(string url)
         {
-            if (url == null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<PageItem>($"url='{url}'").Apply().Any())
+            if (url == null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<Index>($"url='{url}'").Apply().Any())
             {
                 return;
             }
@@ -69,17 +85,24 @@ namespace WebIndex.Model
                 var web = new HtmlWeb();
                 var doc = web.Load(url);
                 var title = doc.DocumentNode.SelectSingleNode("//head/title")?.InnerText;
+                var language = doc.DocumentNode.SelectSingleNode("//html[@lang]")?.GetAttributeValue("lang", "unbekannt");
                 var content = doc.DocumentNode?.InnerText;
 
                 if (!string.IsNullOrWhiteSpace(title) && !string.IsNullOrWhiteSpace(content))
                 {
-                    var webPageData = new PageItem
+                    var webPageData = new Index
                     {
                         Id = Guid.NewGuid(),
                         Url = url,
                         Title = title,
                         Content = content,
-                        Create = DateTime.Now,
+                        MetaData = new MetaData()
+                        {
+                            Encoding = doc.Encoding.WebName,
+                            Language = language,
+                            ContentLength = content.Length,
+                            Create = DateTime.Now,
+                        }
                     };
 
                     WebEx.ComponentHub.GetComponentManager<IndexManager>().Insert(webPageData);
