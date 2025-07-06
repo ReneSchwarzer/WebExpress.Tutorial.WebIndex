@@ -1,0 +1,43 @@
+﻿# Deutsch
+plugin.name=WebIndex
+plugin.description=Ein Tutorial zur Veranschaulichung des WebIndex.
+
+app.name=WebIndex Tutorial
+app.label=WebExprss Application
+app.description=Ein Tutorial zur Veranschaulichung des WebIndex.
+app.license.label=Lizenz MIT 
+app.license.uri=https://github.com/ReneSchwarzer/WebExpress.Tutorial.WebIndex/blob/main/LICENSE
+app.about=Über WebIndex Tutorial
+app.version.label={0} Version {1} erstellt mit {2} Version {3}.
+
+module.name=WebIndex
+module.description=Modul der Anwendung WebIndex.
+
+homepage.label=Startseite
+homepage.conter=Ungefähr {0} Ergebnisse
+infopage.label=Info
+search.label=Suchen
+search.placeholder=enter wql
+setting.label=Einstellungen
+setting.general.label=Allgemein
+setting.seed.label=Startpunkt
+setting.seed.description=Die Seed-Tabelle enthält eine kuratierte Liste von Start-URLs, die als definierter Ausgangspunkt für den Crawling-Prozess dient. Jede dieser initialen Webseiten fungiert als sogenannte Seed-Quelle, von der aus weitere Seiten automatisiert entdeckt und indexiert werden können. Diese gezielte Startbasis ermöglicht es dem Crawler, den Erfassungsprozess strukturiert und thematisch gesteuert durchzuführen.
+setting.seed.add.label=URL
+setting.seed.add.header=Start-URL hinzufügen
+setting.seed.add.help=Fügen Sie eine Start-URL hinzu.
+setting.seed.add.placeholder=http://
+setting.seed.add.confirmation=Die Uri wurde erfolgreich hinzugefügt.
+setting.seed.add.empty=Keine Startpunkt vorhanden.
+setting.catalog.cleared=Der Katalog wurde erfolgreich gelöscht.
+setting.catalog.clear.label=Katalog löschen
+setting.catalog.label=Katalog
+setting.catalog.description=Der Katalog bietet eine strukturierte Übersicht aller während des Crawling-Prozesses erfassten Webseiten. Jeder Eintrag steht für eine individuelle Ressource und enthält relevante Metadaten wie Seitentitel, URL und den Zeitstempel des Abrufs. Die so gesammelten Informationen bilden die zentrale Datengrundlage für den Reverse-Index und ermöglichen effiziente sowie gezielte Suchanfragen innerhalb des Systems.
+
+title.label=Titel
+url.label=URL
+add.label=Hinzufügen
+edit.label=Bearbeiten
+run.label=Starten
+
+crawl.start=Beginne mit der Indexierung...
+crawl.add=Url '{0}' wird hinzugefügt.<br>Fortschritt: {1}

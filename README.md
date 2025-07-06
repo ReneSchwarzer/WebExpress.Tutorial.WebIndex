@@ -38,10 +38,10 @@ A tutorial to demonstrate the `WebIndex`. The tutorial discusses and explains ho
   ```
   This command compiles the solution in release mode. You can find the compiled files in the `bin/Release` directory of your project.
 
-- Run the solution by starting the `WebApp.App` project.
+- Run the solution by starting the `WebIndex.App` project.
   ```bash
-  cd WebApp.App\bin\Release\net9.0
-  dotnet run --project ../../../WebApp.App.csproj
+  cd WebIndex.App\bin\Release\net9.0
+  dotnet run --project ../../../WebIndex.App.csproj
   ```
 
 - After compiling, there should be a file with the `.wxp` extension in the `pkg/Release` directory. This file do you need in `WebExpress`.

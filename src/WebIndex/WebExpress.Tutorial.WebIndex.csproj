@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Version>0.0.9.0</Version>
+		<AssemblyVersion>0.0.9.0</AssemblyVersion>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/ReneSchwarzer/WebExpress.Tutorial.WebIndex.git</RepositoryUrl>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Assets/**/*.*">
+			<LogicalName>$(MSBuildProjectName).Assets.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Internationalization\de" />
+		<EmbeddedResource Include="Internationalization\en" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="../../README.md" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
+	  <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
+	  <PackageReference Include="WebExpress.WebApp" Version="0.0.9-alpha" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'DebugLocal'">
+	  <ProjectReference Include="..\..\..\WebExpress.WebApp\src\WebExpress.WebApp\WebExpress.WebApp.csproj" />
+	  <ProjectReference Include="..\..\..\WebExpress.WebCore\src\WebExpress.WebCore\WebExpress.WebCore.csproj" />
+	  <ProjectReference Include="..\..\..\WebExpress.WebIndex\src\WebExpress.WebIndex\WebExpress.WebIndex.csproj" />
+	  <ProjectReference Include="..\..\..\WebExpress.WebUI\src\WebExpress.WebUI\WebExpress.WebUI.csproj" />
+	</ItemGroup>
+
+</Project>
