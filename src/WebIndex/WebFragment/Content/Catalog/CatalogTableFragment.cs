@@ -48,7 +48,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
 
             Table.RestUri = sitemapManager.GetUri<WWW.Api._1.Catalog>(fragmentContext.ApplicationContext);
 
-            form.Uri.Initialize(x => x.Value = uri?.ToString());
+            form.ItemUri.Initialize(x => x.Value = uri?.ToString());
 
             Table.Add(form);
         }

@@ -9,7 +9,7 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         /// <summary>
         /// Returns or sets the uir associated with the object.
         /// </summary>
-        public ControlFormItemInputText Uri { get; } = new ControlFormItemInputText
+        public ControlFormItemInputText ItemUri { get; } = new ControlFormItemInputText
         {
             Label = "Uri",
             Name = nameof(Model.Document.Url),
@@ -51,7 +51,7 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         {
             Enable = false;
 
-            Add(Uri);
+            Add(ItemUri);
             Add(Title);
             AddPrimaryButton(Submit);
         }

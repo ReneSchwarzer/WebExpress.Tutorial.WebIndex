@@ -17,7 +17,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
     [Scope<WWW.Setting.Seed>]
     public sealed class SeedTableFragment : FragmentControlPanel
     {
-        private ISitemapManager _sitemapManager;
+        private readonly ISitemapManager _sitemapManager;
 
         /// <summary>
         /// Returns the table.
@@ -41,10 +41,12 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         public SeedTableFragment(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            var form = new SeedForm("seedForm");
-            form.Uri = sitemapManager.GetUri<WWW.Setting.Seed>(fragmentContext.ApplicationContext);
-
-            Table.RestUri = sitemapManager.GetUri<WWW.Api._1.Seed>(fragmentContext.ApplicationContext);
+            _sitemapManager = sitemapManager;
+            var form = new SeedForm("seedForm")
+            {
+                Uri = _sitemapManager.GetUri<WWW.Setting.Seed>(fragmentContext.ApplicationContext)
+            };
+            Table.RestUri = _sitemapManager.GetUri<WWW.Api._1.Seed>(fragmentContext.ApplicationContext);
 
             Table.Add(form);
         }
