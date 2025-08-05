@@ -2,7 +2,7 @@
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebUI.WebControl;
 
-namespace WebExpress.WebApp.WebControl
+namespace WebExpress.Tutorial.WebIndex.WebControl
 {
     /// <summary>
     /// Represents a modal form control for the initial page settings.
@@ -44,7 +44,7 @@ namespace WebExpress.WebApp.WebControl
             {
                 x.Add
                     (
-                        string.IsNullOrWhiteSpace(x.Value),
+                        string.IsNullOrWhiteSpace(x.Value.Text),
                         "webexpress.tutorial.webindex:setting.seed.add.empty",
                         TypeInputValidity.Error
                     );
@@ -55,7 +55,7 @@ namespace WebExpress.WebApp.WebControl
                 var page = new Seed()
                 {
                     Id = Guid.NewGuid(),
-                    Url = x.Value
+                    Url = x.Value.Text
                 };
 
                 ViewModel.AddSeed(page);

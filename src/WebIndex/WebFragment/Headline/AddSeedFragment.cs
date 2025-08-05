@@ -1,5 +1,5 @@
-﻿using WebExpress.Tutorial.WebIndex.WWW.Setting;
-using WebExpress.WebApp.WebControl;
+﻿using WebExpress.Tutorial.WebIndex.WebControl;
+using WebExpress.Tutorial.WebIndex.WWW.Setting;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
