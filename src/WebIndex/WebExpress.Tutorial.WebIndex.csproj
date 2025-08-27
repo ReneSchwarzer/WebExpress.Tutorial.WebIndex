@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
-	  <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
+	  <PackageReference Include="HtmlAgilityPack" Version="1.12.2" />
 	  <PackageReference Include="WebExpress.WebApp" Version="0.0.9-alpha" />
 	</ItemGroup>
 
