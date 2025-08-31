@@ -41,7 +41,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// <summary>
         /// Retrieves a collection of options.
         /// </summary>
-        /// <param name="request">The request object containing the criteria for retrieving options. Cannot be null.</param>
+        /// <param name="request">
+        /// The request object containing the criteria for retrieving options. Cannot be null.
+        /// </param>
         /// <param name="row">The row object for which options are being retrieved. Cannot be null.</param>
         public override IEnumerable<RestApiCrudTableRowOption> GetOptions(Request request, Model.Seed row)
         {
@@ -127,11 +129,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// <param name="request">The request.</param>
         public override void DeleteData(string id, Request request)
         {
-            var indexManager = WebEx.ComponentHub.GetComponentManager<IndexManager>();
-            var item = indexManager.All<Model.Seed>()
-                .FirstOrDefault(x => x.Id.ToString() == id);
-
-            indexManager.Delete<Model.Seed>(item);
+            ViewModel.DeleteSeed(id);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebIndex;
 using WebExpress.WebApp.WebRestApi;
 using WebExpress.WebCore;
@@ -94,6 +95,29 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
                     x => x.Url.Contains(filter) ||
                     x.Title.Contains(filter)
                 );
+        }
+
+        /// <summary>
+        /// Updates the data record identified by the specified Id.
+        /// </summary>
+        /// <param name="item"> The item containing the updated data.</param>
+        /// <param name="request">The HTTP request containing the update parameters.</param>
+        public override void UpdateData(Model.Document item, Request request)
+        {
+            item.Url = request.GetParameter(nameof(Model.Document.Url))?.Value;
+            item.Title = request.GetParameter(nameof(Model.Document.Title))?.Value;
+
+            ViewModel.UpdateDocument(item);
+        }
+
+        /// <summary>
+        /// Deletes data.
+        /// </summary>
+        /// <param name="id">The id of the data to delete.</param>
+        /// <param name="request">The request.</param>
+        public override void DeleteData(string id, Request request)
+        {
+            ViewModel.DeleteDocument(id);
         }
     }
 }

@@ -79,6 +79,43 @@ namespace WebExpress.Tutorial.WebIndex.Model
         }
 
         /// <summary>
+        /// Deletes a seed with the specified identifier.
+        /// </summary>
+        /// <param name="id">
+        /// The unique identifier of the seed to delete, represented as a 
+        /// string. Must be a valid GUID.
+        /// </param>
+        public static void DeleteSeed(string id)
+        {
+            var guid = System.Guid.Parse(id);
+
+            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Seed>(guid);
+        }
+
+        /// <summary>
+        /// Updates the specified document in the system by inserting it into the index manager.
+        /// </summary>
+        /// <param name="document">The document to be updated. Cannot be null.</param>
+        public static void UpdateDocument(Document document)
+        {
+            _componentHub.GetComponentManager<IndexManager>()?.Update(document);
+        }
+
+        /// <summary>
+        /// Deletes a document with the specified identifier from the index.
+        /// </summary>
+        /// <param name="id">
+        /// The unique identifier of the document to delete, represented as a 
+        /// string. Must be a valid GUID.
+        /// </param>
+        public static void DeleteDocument(string id)
+        {
+            var guid = System.Guid.Parse(id);
+
+            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Document>(guid);
+        }
+
+        /// <summary>
         /// Retrieves a collection from the index that match the specified search string.
         /// </summary>
         /// <param name="search">The search string to match against the index.</param>
