@@ -2,9 +2,11 @@
 using WebExpress.WebApp.WebScope;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
+using WebExpress.WebUI.WebIcon;
 
 namespace WebExpress.Tutorial.WebIndex.WWW
 {
+    [WebIcon<IconHome>]
     [Title("webexpress.tutorial.webindex:homepage.label")]
     [Segment(null, "webexpress.tutorial.webindex:homepage.label")]
     [Scope<IScopeGeneral>]
