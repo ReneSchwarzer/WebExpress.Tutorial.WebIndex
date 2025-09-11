@@ -12,8 +12,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting
     /// </summary>
     [WebIcon<IconGlobe>]
     [Title("webexpress.tutorial.webindex:setting.catalog.label")]
-    [SettingCategory<SettingCategoryGeneral>()]
-    [SettingGroup<SettingGroupGeneral>()]
+    [SettingGroup<SettingGroupGeneralGeneral>()]
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
     public sealed class Catalog : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin

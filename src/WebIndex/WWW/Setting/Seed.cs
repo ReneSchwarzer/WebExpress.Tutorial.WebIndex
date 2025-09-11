@@ -12,8 +12,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting
     /// </summary>
     [WebIcon<IconSeedling>]
     [Title("webexpress.tutorial.webindex:setting.seed.label")]
-    [SettingCategory<SettingCategoryGeneral>()]
-    [SettingGroup<SettingGroupGeneral>()]
+    [SettingGroup<SettingGroupGeneralGeneral>()]
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
     public sealed class Seed : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
