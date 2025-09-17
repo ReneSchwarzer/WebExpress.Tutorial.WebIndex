@@ -14,7 +14,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     /// </summary>
     [Section<SectionContentPrimary>]
     [Scope<WWW.Index>]
-    public sealed class SearchFragment : FragmentControlPanelFlexbox
+    public sealed class SearchFragment : FragmentControlPanelFlex
     {
         /// <summary>
         /// Returns the control image for the home content fragment.
@@ -31,7 +31,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         public ControlForm Form { get; } = new SearchForm()
         {
-            Justify = TypeJustifiedFlexbox.Center
+            Justify = TypeJustifiedFlex.Center
         };
 
         /// <summary>
@@ -41,9 +41,9 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         public SearchFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Layout = TypeLayoutFlexbox.Default;
-            Align = TypeAlignFlexbox.Center;
-            Justify = TypeJustifiedFlexbox.Center;
+            Layout = TypeLayoutFlex.Default;
+            Align = TypeAlignFlex.Center;
+            Justify = TypeJustifiedFlex.Center;
             Direction = TypeDirection.Vertical;
 
             Add(Image);

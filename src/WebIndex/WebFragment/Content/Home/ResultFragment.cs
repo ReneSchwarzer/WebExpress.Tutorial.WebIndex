@@ -20,7 +20,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     [Section<SectionContentSecondary>]
     [Scope<WWW.Index>]
     [Condition<SerachCondition>]
-    public sealed class ResultFragment : FragmentControlPanelFlexbox
+    public sealed class ResultFragment : FragmentControlPanelFlex
     {
         /// <summary>
         /// Returns the list control for displaying search results.
@@ -72,9 +72,9 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         public ResultFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Layout = TypeLayoutFlexbox.Default;
-            Align = TypeAlignFlexbox.Center;
-            Justify = TypeJustifiedFlexbox.Center;
+            Layout = TypeLayoutFlex.Default;
+            Align = TypeAlignFlex.Center;
+            Justify = TypeJustifiedFlex.Center;
             Direction = TypeDirection.Vertical;
 
             Add(Counter);
