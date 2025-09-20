@@ -6,7 +6,7 @@ app.name=WebIndex Tutorial
 app.label=WebExprss Application
 app.description=Ein Tutorial zur Veranschaulichung des WebIndex.
 app.license.label=Lizenz MIT 
-app.license.uri=https://github.com/ReneSchwarzer/WebExpress.Tutorial.WebIndex/blob/main/LICENSE
+app.license.uri=https://github.com/webexpress-framework/WebExpress.Tutorial.WebIndex/blob/main/LICENSE
 app.about=Über WebIndex Tutorial
 app.version.label={0} Version {1} erstellt mit {2} Version {3}.
 
