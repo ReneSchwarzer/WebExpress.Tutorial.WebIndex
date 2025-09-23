@@ -36,7 +36,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         public ClearCatalogFragment(IComponentHub componentHub, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Label = "webexpress.tutorial.webindex:setting.catalog.clear.label";
+            Text = "webexpress.tutorial.webindex:setting.catalog.clear.label";
             //Uri = componentHub.SitemapManager.GetUri<Catalog>(fragmentContext.ApplicationContext);
             Color = TypeColorText.Danger;
             Icon = new IconTrash();
